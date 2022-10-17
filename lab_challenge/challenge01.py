@@ -20,6 +20,20 @@ def main():
     print("Hello ",user_input_name,"!"," Hope you're having a great ",user_input_day,"!",sep="")
 
 
+    
+    # in formatted string literals (f-strings)
+
+    # input name
+
+    name = input("Hello user! What is your name?")
+
+    # input day
+
+    day = input("Do you know what day of the week it is?")
+    
+    # fstring
+
+    print(f"Hello, {name}! Happy {day}!")
 main()
  
 
