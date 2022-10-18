@@ -27,10 +27,10 @@ incorrect2= trivia["incorrect_answers"][1]
 incorrect3= trivia["incorrect_answers"][2]
 
 print(html.unescape(question))
-print(html.unescape(incorrect))
-print(html.unescape(incorrect))
+print(html.unescape(incorrect1))
+print(html.unescape(incorrect3))
 print(html.unescape(correct))
-print(html.unescape(incorrect))
+print(html.unescape(incorrect2))
 
 
 
