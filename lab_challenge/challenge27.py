@@ -32,7 +32,7 @@ def main():
 
     a= trial[2]["goggles"]
     b= trial[2]["eyes"]
-    c= trial[-1]
+    c= trial[3]
     
     # print out "My eyes! The goggles do nothing!"
 
