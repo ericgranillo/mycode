@@ -3,7 +3,7 @@
 
 
     # define bottles
-bottles= int(input("")
+bottles= int(input(""))
 
 for num in range(1,bottles):
    # bottles= int(input("")
