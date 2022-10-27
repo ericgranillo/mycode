@@ -23,12 +23,12 @@ def showStatus():
     print('Weapons:', weapon)
     # check if there's an item in the room, if so print it
     if "item" in rooms[currentRoom]:
-      print('You see a ' + rooms[currentRoom]['item'])
+        print('You see a ' + rooms[currentRoom]['item'])
     print("---------------------------")
     # check if there's a weapon in the room, then print
     if "weapon" in rooms[currentRoom]:
         print('You see a ' +rooms[currentRoom]['weapon'])
-    print("---------------------------")   
+    print("---------------------------")
 
 
 # an item and weapon inventory, which is initially empty
@@ -46,13 +46,13 @@ rooms = {
             },
 
         'West Garden' : {
-            'west' : 'shed',
+            'west' : 'Shed',
             'east' : 'Front Garden'
             },
 
         'East Garden' : {
             'west' : 'Front Garden',
-            'item' : 'potion'
+            'item' : 'Potion'
             },
 
         'Front Entrance' : {
@@ -60,7 +60,7 @@ rooms = {
             'west'  : 'Entertainment Room',
             'south' : 'Front Garden',
             'east'  : 'Office',
-            'item'  : 'key'
+            'item'  : 'Key'
             },
 
         'Hall' : {
@@ -75,7 +75,7 @@ rooms = {
             'north' : 'Backyard',
             'west'  : 'Kitchen',
             'south' : 'Hall',
-            'east'  : 'Living Room'
+            'east'  : 'Living Room',
             'weapon': 'Knife'
             },
 
@@ -93,9 +93,9 @@ rooms = {
         'Kitchen' : {
             'south' : 'Entertainment Room',
             'east'  : 'Dining Room',
-            'item'  : 'shrooms'
+            'item'  : 'Shrooms'
             },
-            
+        
         'Theater Room' : {
             'east' : 'Hall',
             'item' : 'Killer Klown'
@@ -109,12 +109,12 @@ rooms = {
 
         'Garage' : {
             'north' : 'Living Room',
-            'item'  : 'rope'
+            'item'  : 'Rope'
             },
+
         'Backyard' : {
-
-
-
+            'item' : 'Death Dealer'
+             },
 
         'Shed' : {
             'east'  : 'West Garden',
@@ -135,12 +135,12 @@ while True:
     # the player MUST type something in
     # otherwise input will keep asking
     move = ''
-    while move == '':  
+    while move == '':
         move = input('>')
 
     # normalizing input:
     # .lower() makes it lower case, .split() turns it to a list
-    # therefore, "get golden key" becomes ["get", "golden key"]          
+    # therefore, "get golden key" becomes ["get", "golden key"]
     move = move.lower().split(" ", 1)
 
     #if they type 'go' first
@@ -166,7 +166,7 @@ while True:
             #delete the item key:value pair from the room's dictionary
             del rooms[currentRoom]['item']
         # add weapon to inventory
-        if "weapon" in rooms[currentRoom] and move[1] in room[currentRoom]['weapon']:
+        if "weapon" in rooms[currentRoom] and move[1] in rooms[currentRoom]['weapon']:
             weapon.append(move[1])
             print(move[1] + ' added!')
             del rooms[currentRoom]['weapon']
@@ -176,15 +176,18 @@ while True:
             print('Can\'t get ' + move[1] + '!')
 
         ## If a player enters a room with a monster but has chainsaw kill monster
-#    if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
-#        if 'chainsaw' in inventory:
-#            del rooms[currentRoom]['item']
-#            print('Chop em up and cut em down, we are going old school Doom on this monster. Not putting its hands on my cookie.')
-#        else:
-#            print('A monster has got you... GAME OVER!')
-#            break
+    if 'item' in rooms[currentRoom] and 'Shadow Monster' in rooms[currentRoom]['item']:
+        if 'chainsaw' in weapon:
+            del rooms[currentRoom]['item']
+            print('''Chop em up and cut em down, we are going old
+           school Doom on this monster. Not putting its hands
+            on my cookie.''')
+        else:
+            print('A monster has got you... GAME OVER!')
+            break
 
-        ## Define how a player can win
-    if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
-        print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
+        ## Define how a player was tricked and lose the gamen
+    if currentRoom == 'Backyard' and 'Potion' in inventory and 'Shrooms' in inventory and 'Rope' in inventory and 'Knife' in weapon:
+        print('''You have come to your senses, you murdered the entire
+               family... You have the tools to end it all...''')
         break
