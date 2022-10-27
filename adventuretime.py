@@ -10,7 +10,7 @@ def showInstructions():
     ========
     Commands:
       go [direction]
-      get [item]
+      get [item/weapon]
     ''')
 
 def showStatus():
