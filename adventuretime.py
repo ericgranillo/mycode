@@ -47,7 +47,8 @@ rooms = {
 
         'West Garden' : {
             'West' : 'Shed',
-            'East' : 'Front Garden'
+            'East' : 'Front Garden',
+            'Item' : 'Rope'
             },
 
         'East Garden' : {
@@ -76,7 +77,8 @@ rooms = {
             'West'  : 'Kitchen',
             'South' : 'Hall',
             'East'  : 'Living Room',
-            'Weapon': 'Knife'
+            'Weapon': 'Knife',
+            'Item'  : 'Lighter'
             },
 
         'Entertainment Room' : {
@@ -85,7 +87,8 @@ rooms = {
             'Item'  : 'Shadow Monster'
             },
 
-        'office' : {
+        'Office' : {
+            'North' : 'Theater Room',
             'West'  : 'Front Entrance',
             'Item'  : 'Skeleton King'
             },
@@ -97,28 +100,30 @@ rooms = {
             },
         
         'Theater Room' : {
-            'East' : 'Hall',
+            'West' : 'Hall',
+            'South': 'Office',
             'Item' : 'Killer Klown'
             },
 
         'Living Room' : {
             'West' : 'Dining Room',
             'South': 'Garage',
-            'Item' : 'The Blob'
+            'Item' : 'Green Blob'
             },
 
         'Garage' : {
             'North' : 'Living Room',
-            'Item'  : 'Rope'
+            'Item'  : 'Gas Can'
             },
 
         'Backyard' : {
+            'South': 'Dining Room',
             'Item' : 'Death Dealer'
              },
 
         'Shed' : {
             'East'  : 'West Garden',
-            'Weapon': 'Chainsaw'
+            'Weapon': 'Og Chainsaw'
             }
 
          }
@@ -176,18 +181,56 @@ while True:
 
         ## If a player enters a room with a monster but has chainsaw kill monster
     if 'Item' in rooms[currentRoom] and 'Shadow Monster' in rooms[currentRoom]['Item']:
-        if 'Chainsaw' in weapon:
+        if 'Og Chainsaw' in weapon:
             del rooms[currentRoom]['Item']
-            print('Watch out! The Shadow Monster has appeared!')
-            print('Luckily, we have our trusty chainsaw!')
-            print('Chop em up and cut em down, we are going old Doom!')
+            print('Watch out! The Shadow Monster has appeared!\n')
+            print('Luckily, we have our trusty chainsaw!\n')
+            print('Chop em up and cut em down, we are going OG Doom!')
             # del weapon['Chainsaw']
         else:
-            print('A monster has got you... GAME OVER!')
-            break
+            print('The Shadow Monster has attacked you... find the Og!')
+
+        # If a player enters a room with a monsters but has other weapons
+    if 'Item' in rooms[currentRoom] and 'Skeleton King' in rooms[currentRoom]['Item']:
+        if 'Hockey Stick' in weapon:
+            del rooms[currentRoom]['Item']
+            print('Watch out! A Skeleton King has appeared!\n')
+            print('We\'ll play hockey with his bones!\n')
+            print('A monster, is this a nightmare?')
+        else:
+            print('The Skeleton King has attacked you... find weapons!')
+
+        # if a player enters a room with a monster but has other weapons
+    if 'Item' in rooms[currentRoom] and 'Killer Klown' in rooms[currentRoom]['Item']:
+        if 'Knife' in weapon:
+            del rooms[currentRoom]['Item']
+            print('Watch out! A Killer Klown has appeared!\n')
+            print('Send it back to outer space with that knife!\n')
+            print('This can\'t be real?')
+        else:
+            print('The Killer Klown has attacked you... find a knife!')
+
+        # if a player enters a room with a monster but has other weapons
+    if 'Item' in rooms[currentRoom] and 'Green Blob' in rooms[currentRoom]['Item']:
+        if 'Lighter' and 'Gas Can' in inventory:
+            del rooms[currentRoom]['Item']
+            print('Watch out! The Green Blob will eat you!\n')
+            print('I guess this Green Blob has a melting point!\n')
+            print('Surely I\'ll wake up soon, right?')
+        else:
+            print('The Blob has eaten your shoe... Quick burn it!')
+
+        # if a player enters backyard without required items
+    if 'Item' in rooms[currentRoom] and 'Death Dealer' in rooms[currentRoom]['Item']:
+        if 'Potion' or 'Shrooms' or 'Knife' or 'Rope' in inventory:
+            del rooms[currentRoom]['Item']
+            print('The Death Dealer has come for you!\n')
+            print('Find all important items to escape its grip!\n')
+            print('It\'ll all be over soon...\n')
 
         ## Define how a player was tricked and lose the gamen
     if currentRoom == 'Backyard' and 'Potion' in inventory and 'Shrooms' in inventory and 'Rope' in inventory and 'Knife' in weapon:
-        print('''You have come to your senses, you murdered the entire
-               family... You have the tools to end it all...''')
+        print('''You're finally awake! What have you done!
+        You murdered the entire family...
+        You have the tools to end it all...''')
         break
