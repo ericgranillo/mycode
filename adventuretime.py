@@ -9,8 +9,8 @@ def showInstructions():
     Murder House an RPG Game
     ========
     Commands:
-      go [direction]
-      get [item/weapon]
+      Go [direction]
+      Get [item/weapon]
     ''')
 
 def showStatus():
@@ -22,12 +22,12 @@ def showStatus():
     print('Inventory:', inventory)
     print('Weapons:', weapon)
     # check if there's an item in the room, if so print it
-    if "item" in rooms[currentRoom]:
-        print('You see a ' + rooms[currentRoom]['item'])
+    if "Item" in rooms[currentRoom]:
+        print('You see a ' + rooms[currentRoom]['Item'])
     print("---------------------------")
     # check if there's a weapon in the room, then print
-    if "weapon" in rooms[currentRoom]:
-        print('You see a ' +rooms[currentRoom]['weapon'])
+    if "Weapon" in rooms[currentRoom]:
+        print('You see a ' + rooms[currentRoom]['Weapon'])
     print("---------------------------")
 
 
@@ -40,85 +40,85 @@ weapon = []
 rooms = {
 
         'Front Garden' : {
-            'north' : 'Front Entrance',
-            'west'  : 'West Garden',
-            'east'  : 'East Garden'
+            'North' : 'Front Entrance',
+            'West'  : 'West Garden',
+            'East'  : 'East Garden'
             },
 
         'West Garden' : {
-            'west' : 'Shed',
-            'east' : 'Front Garden'
+            'West' : 'Shed',
+            'East' : 'Front Garden'
             },
 
         'East Garden' : {
-            'west' : 'Front Garden',
-            'item' : 'Potion'
+            'West' : 'Front Garden',
+            'Item' : 'Potion'
             },
 
         'Front Entrance' : {
-            'north' : 'Hall',
-            'west'  : 'Entertainment Room',
-            'south' : 'Front Garden',
-            'east'  : 'Office',
-            'item'  : 'Key'
+            'North' : 'Hall',
+            'West'  : 'Entertainment Room',
+            'South' : 'Front Garden',
+            'East'  : 'Office',
+            'Item'  : 'Key'
             },
 
         'Hall' : {
-            'north' : 'Dining Room',
-            'west'  : 'Entertainment Room',
-            'south' : 'Front Entrance',
-            'east'  : 'Theater Room',
-            'weapon': 'Hockey Stick'
+            'North' : 'Dining Room',
+            'West'  : 'Entertainment Room',
+            'South' : 'Front Entrance',
+            'East'  : 'Theater Room',
+            'Weapon': 'Hockey Stick'
             },
 
         'Dining Room' : {
-            'north' : 'Backyard',
-            'west'  : 'Kitchen',
-            'south' : 'Hall',
-            'east'  : 'Living Room',
-            'weapon': 'Knife'
+            'North' : 'Backyard',
+            'West'  : 'Kitchen',
+            'South' : 'Hall',
+            'East'  : 'Living Room',
+            'Weapon': 'Knife'
             },
 
         'Entertainment Room' : {
-            'north' : 'Kitchen',
-            'east'  : 'Hall',
-            'item'  : 'Shadow Monster'
+            'North' : 'Kitchen',
+            'East'  : 'Hall',
+            'Item'  : 'Shadow Monster'
             },
 
         'office' : {
-            'west'  : 'Front Entrance',
-            'item'  : 'Skeleton King'
+            'West'  : 'Front Entrance',
+            'Item'  : 'Skeleton King'
             },
 
         'Kitchen' : {
-            'south' : 'Entertainment Room',
-            'east'  : 'Dining Room',
-            'item'  : 'Shrooms'
+            'South' : 'Entertainment Room',
+            'East'  : 'Dining Room',
+            'Item'  : 'Shrooms'
             },
         
         'Theater Room' : {
-            'east' : 'Hall',
-            'item' : 'Killer Klown'
+            'East' : 'Hall',
+            'Item' : 'Killer Klown'
             },
 
         'Living Room' : {
-            'west' : 'Dining Room',
-            'south': 'Garage',
-            'item' : 'The Blob'
+            'West' : 'Dining Room',
+            'South': 'Garage',
+            'Item' : 'The Blob'
             },
 
         'Garage' : {
-            'north' : 'Living Room',
-            'item'  : 'Rope'
+            'North' : 'Living Room',
+            'Item'  : 'Rope'
             },
 
         'Backyard' : {
-            'item' : 'Death Dealer'
+            'Item' : 'Death Dealer'
              },
 
         'Shed' : {
-            'east'  : 'West Garden',
-            'weapon': 'chainsaw'
+            'East'  : 'West Garden',
+            'Weapon': 'Chainsaw'
             }
 
          }
@@ -139,12 +139,11 @@ while True:
         move = input('>')
 
     # normalizing input:
-    # .lower() makes it lower case, .split() turns it to a list
-    # therefore, "get golden key" becomes ["get", "golden key"]
-    move = move.lower().split(" ", 1)
+    # .title() makes each word capitalize, .split() turns it to a list
+        move = move.title().split(" ", 1)
 
     #if they type 'go' first
-    if move[0] == 'go':
+    if move[0] == 'Go':
         #check that they are allowed wherever they want to go
         if move[1] in rooms[currentRoom]:
             #set the current room to the new room
@@ -154,34 +153,35 @@ while True:
             print('You can\'t go that way!')
 
     #if they type 'get' first
-    if move[0] == 'get' :
+    if move[0] == 'Get' :
         # make two checks:
-        # 1. if the current room contains an item
+        # 1. if the current room contains an item or weapon
         # 2. if the item in the room matches the item the player wishes to get
-        if "item" in rooms[currentRoom] and move[1] in rooms[currentRoom]['item']:
+        if "Item" in rooms[currentRoom] and move[1] in rooms[currentRoom]['Item']:
             #add the item to their inventory
             inventory.append(move[1])
             #display a helpful message
             print(move[1] + ' added!')
             #delete the item key:value pair from the room's dictionary
-            del rooms[currentRoom]['item']
+            del rooms[currentRoom]['Item']
         # add weapon to inventory
-        if "weapon" in rooms[currentRoom] and move[1] in rooms[currentRoom]['weapon']:
+        elif "Weapon" in rooms[currentRoom] and move[1] in rooms[currentRoom]['Weapon']:
             weapon.append(move[1])
             print(move[1] + ' added!')
-            del rooms[currentRoom]['weapon']
+            del rooms[currentRoom]['Weapon']
         # if there's no item in the room or the item or weapon doesn't match
         else:
             #tell them they can't get it
             print('Can\'t get ' + move[1] + '!')
 
         ## If a player enters a room with a monster but has chainsaw kill monster
-    if 'item' in rooms[currentRoom] and 'Shadow Monster' in rooms[currentRoom]['item']:
-        if 'chainsaw' in weapon:
-            del rooms[currentRoom]['item']
-            print('''Chop em up and cut em down, we are going old
-           school Doom on this monster. Not putting its hands
-            on my cookie.''')
+    if 'Item' in rooms[currentRoom] and 'Shadow Monster' in rooms[currentRoom]['Item']:
+        if 'Chainsaw' in weapon:
+            del rooms[currentRoom]['Item']
+            print('Watch out! The Shadow Monster has appeared!')
+            print('Luckily, we have our trusty chainsaw!')
+            print('Chop em up and cut em down, we are going old Doom!')
+            # del weapon['Chainsaw']
         else:
             print('A monster has got you... GAME OVER!')
             break
