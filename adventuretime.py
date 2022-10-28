@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""TLG Learning| EGranillo |  Adventure time:
+"""TLG Learning| EGranillo- Credit to Alta3 |  Adventure time:
     Let's go on a trip you'll never remember"""
 
 def showInstructions():
@@ -98,7 +98,7 @@ rooms = {
             'East'  : 'Dining Room',
             'Item'  : 'Shrooms'
             },
-        
+
         'Theater Room' : {
             'West' : 'Hall',
             'South': 'Office',
@@ -212,7 +212,7 @@ while True:
 
         # if a player enters a room with a monster but has other weapons
     if 'Item' in rooms[currentRoom] and 'Green Blob' in rooms[currentRoom]['Item']:
-        if 'Lighter' and 'Gas Can' in inventory:
+        if 'Gas Can' in inventory:
             del rooms[currentRoom]['Item']
             print('Watch out! The Green Blob will eat you!\n')
             print('I guess this Green Blob has a melting point!\n')
@@ -222,14 +222,16 @@ while True:
 
         # if a player enters backyard without required items
     if 'Item' in rooms[currentRoom] and 'Death Dealer' in rooms[currentRoom]['Item']:
-        if 'Potion' or 'Shrooms' or 'Knife' or 'Rope' in inventory:
+        if 'Shrooms' in inventory:
             del rooms[currentRoom]['Item']
             print('The Death Dealer has come for you!\n')
             print('Find all important items to escape its grip!\n')
             print('It\'ll all be over soon...\n')
 
         ## Define how a player was tricked and lose the gamen
-    if currentRoom == 'Backyard' and 'Potion' in inventory and 'Shrooms' in inventory and 'Rope' in inventory and 'Knife' in weapon:
+    if (currentRoom == 'Backyard' and 'Potion' in inventory
+            and 'Shrooms'in inventory and 'Rope' in inventory
+            and 'Knife' in weapon):
         print('''You're finally awake! What have you done!
         You murdered the entire family...
         You have the tools to end it all...''')
